@@ -39,7 +39,7 @@ export default function App() {
   const handleChange = ({ target }) => setSearchString(target.value);
 
   const matchSearch = item =>
-    item.title.toLowerCase().indexOf(searchString) !== -1;
+    item.title.toLowerCase().indexOf(searchString.toLowerCase()) !== -1;
 
   const filterList = () =>
     list.cata({
