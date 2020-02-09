@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { isEmpty, complement } from "ramda";
+import { isEmpty, complement, equals } from "ramda";
 import daggy from "daggy";
 import "./styles.css";
 
@@ -23,6 +23,7 @@ const LIST = [
 ];
 
 const isNotEmpty = complement(isEmpty);
+const isNotEqual = complement(equals);
 
 export default function App() {
   const [list, setList] = useState(List.Empty);
@@ -39,7 +40,10 @@ export default function App() {
   const handleChange = ({ target }) => setSearchString(target.value);
 
   const matchSearch = item =>
-    item.title.toLowerCase().indexOf(searchString.toLowerCase()) !== -1;
+    isNotEqual(
+      item.title.toLowerCase().indexOf(searchString.toLowerCase()),
+      -1
+    );
 
   const filterList = () =>
     list.cata({
